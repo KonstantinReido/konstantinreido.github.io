@@ -8,6 +8,27 @@ title: Example content
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
 </div>
 
+{% highlight ruby %}
+class HelloWorld
+  include Singleton
+  include Log4r
+
+  attr_reader :devices
+  attr_reader :log
+
+  def initialize
+    @log = default_logger
+  end
+
+  def execute(device_id, command_class, command_class_function, argument = nil)
+    raise "No device with id '#{device_id}'" unless @devices.has_key?(device_id)
+    raise "Device with id '#{device_id}' does not support command class '#{command_class}'" unless @devices[device_id].support_commandclass?(command_class)
+    function_name = command_class_function.to_s
+    run_zway_function(device_id, command_class, function_name, argument)
+  end
+end
+{% endhighlight %}
+
 Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
 > Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
